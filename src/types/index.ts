@@ -64,3 +64,19 @@ export interface Category {
   percentage: number;
   color: string;
 }
+
+export interface Stock {
+  id: number;
+  name: string;
+  companyName: string;
+  shares: number;
+  price: number;
+  change: number;
+  value: number;
+}
+
+export interface NetWorthDataPoint {
+  month: string;
+  value: number;
+  percentChange: number;
+}

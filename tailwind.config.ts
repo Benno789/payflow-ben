@@ -64,10 +64,10 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				payflow: {
-					purple: '#7E69AB',
-					'purple-dark': '#6E59A5',
-					'purple-light': '#9b87f5',
-					'purple-lighter': '#D6BCFA',
+					green: '#42FF9F',         // Neon-Grün
+					'green-dark': '#34CC7F',  // Dunkleres Neon-Grün
+					'green-light': '#8CFFCB', // Helleres Neon-Grün
+					'green-pale': '#E2FFF2',  // Sehr helles Neon-Grün
 					gray: '#8E9196',
 					'gray-light': '#F1F0FB',
 					'gray-dark': '#1A1F2C',
