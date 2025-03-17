@@ -29,3 +29,38 @@ export interface Card {
   holderName: string;
   provider: 'visa' | 'mastercard' | 'amex';
 }
+
+export interface UserProfile {
+  firstName: string;
+  lastName: string;
+  email: string;
+  address?: string;
+  monthlyIncome?: number;
+  rentAmount?: number;
+  doesRent?: boolean;
+}
+
+export interface BankConnection {
+  id: string;
+  name: string;
+  description: string;
+  logo: string;
+  connected: boolean;
+}
+
+export interface Subscription {
+  id: string;
+  name: string;
+  amount: number;
+  currency: string;
+  frequency: 'monthly' | 'yearly' | 'weekly';
+  category: string;
+  nextPaymentDate: Date;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  percentage: number;
+  color: string;
+}
