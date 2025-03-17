@@ -144,19 +144,21 @@ const Assets: React.FC = () => {
             </div>
           </div>
           
-          <style jsx>{`
-            :root {
-              --chart-gradient-start: #42FF9F;
-              --chart-gradient-end: #42FF9F;
-              --chart-line: #42FF9F;
-            }
-            
-            .dark {
-              --chart-gradient-start: #9b87f5;
-              --chart-gradient-end: #9b87f5;
-              --chart-line: #9b87f5;
-            }
-          `}</style>
+          <style>
+            {`
+              :root {
+                --chart-gradient-start: #42FF9F;
+                --chart-gradient-end: #42FF9F;
+                --chart-line: #42FF9F;
+              }
+              
+              .dark {
+                --chart-gradient-start: #9b87f5;
+                --chart-gradient-end: #9b87f5;
+                --chart-line: #9b87f5;
+              }
+            `}
+          </style>
           
           <NetWorthChart data={netWorthData} forecast={forecastMode} />
         </div>

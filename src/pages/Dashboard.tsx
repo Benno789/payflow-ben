@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -28,7 +27,6 @@ import StockPortfolio from '@/components/StockPortfolio';
 import NetWorthChart from '@/components/NetWorthChart';
 import ProfileSettings from '@/components/ProfileSettings';
 
-// Mock-Daten für das Dashboard
 const categories: Category[] = [
   { id: '1', name: 'Wohnen', percentage: 30, color: '#42FF9F' },
   { id: '2', name: 'Transport', percentage: 15, color: '#34CC7F' },
@@ -37,7 +35,6 @@ const categories: Category[] = [
   { id: '5', name: 'Sonstiges', percentage: 10, color: '#1A1F2C' }
 ];
 
-// Abonnement-Daten
 const subscriptions: Subscription[] = [
   {
     id: '1',
@@ -77,7 +74,6 @@ const subscriptions: Subscription[] = [
   }
 ];
 
-// Monatliche Ausgaben-Daten für Balkendiagramm
 const monthlyExpenseData = [
   { name: 'Jan', amount: 1650 },
   { name: 'Feb', amount: 1480 },
@@ -87,7 +83,6 @@ const monthlyExpenseData = [
   { name: 'Jun', amount: 1620 }
 ];
 
-// NetWorth-Daten
 const netWorthData = [
   { month: 'Jan', value: 15000, percentChange: 0 },
   { month: 'Feb', value: 15750, percentChange: 5 },
@@ -108,31 +103,26 @@ const Dashboard: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const navigate = useNavigate();
   
-  // Load user profile data on initial render
   useEffect(() => {
     const storedProfile = localStorage.getItem('userProfile');
     if (storedProfile) {
       const profile = JSON.parse(storedProfile);
       setUserProfile(profile);
       
-      // Generate transactions based on profile data
       const generatedTransactions = generateTransactions(profile);
       setTransactions(generatedTransactions);
     }
     
-    // Check for dark mode
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
     }
   }, []);
   
-  // Function to generate transactions based on profile data
   const generateTransactions = (profile: UserProfile): Transaction[] => {
     const result: Transaction[] = [];
     
     if (profile.monthlyIncome) {
-      // Income transaction
       result.push({
         id: '1',
         type: 'incoming',
@@ -144,7 +134,6 @@ const Dashboard: React.FC = () => {
         status: 'completed'
       });
       
-      // Rent transaction
       if (profile.rentAmount && profile.doesRent) {
         result.push({
           id: '2',
@@ -159,7 +148,6 @@ const Dashboard: React.FC = () => {
         });
       }
       
-      // Generate other transactions based on income
       result.push({
         id: '3',
         type: 'outgoing',
@@ -197,7 +185,6 @@ const Dashboard: React.FC = () => {
         suspicious: true
       });
     } else {
-      // Fallback to mock data if no income provided
       return [
         {
           id: '1',
@@ -260,41 +247,33 @@ const Dashboard: React.FC = () => {
     return result;
   };
 
-  // Calculate total expenses from transactions
   const totalExpenses = transactions
     .filter(tx => tx.type === 'outgoing')
     .reduce((sum, tx) => sum + tx.amount, 0);
     
-  // Last month's expenses (mock data with some relation to current expenses)
   const lastMonthExpenses = totalExpenses * 0.85;
   const percentageChange = ((totalExpenses - lastMonthExpenses) / lastMonthExpenses) * 100;
   
-  // To save amount (based on income or mock data)
   const monthlyIncome = userProfile?.monthlyIncome || 2800;
-  const toSave = monthlyIncome * 0.2; // 20% of income for saving
+  const toSave = monthlyIncome * 0.2;
   
-  // Total subscriptions
   const totalSubscriptions = subscriptions.reduce((sum, sub) => sum + sub.amount, 0);
 
-  // Calculate expenses by category
   const expensesByCategory = categories.map(cat => ({
     name: cat.name,
     value: (totalExpenses * cat.percentage) / 100,
     color: cat.color
   }));
 
-  // Pie data
   const pieData = expensesByCategory.map(cat => ({
     name: cat.name,
     value: cat.value,
     color: cat.color
   }));
 
-  // Check if the user is logged in
   const isLoggedIn = localStorage.getItem('onboardingCompleted') === 'true';
   
   if (!isLoggedIn) {
-    // If not logged in, redirect to the sign-in page
     React.useEffect(() => {
       navigate('/signin');
     }, [navigate]);
@@ -677,19 +656,21 @@ const Dashboard: React.FC = () => {
                 </p>
               </div>
 
-              <style jsx>{`
-                :root {
-                  --chart-gradient-start: #42FF9F;
-                  --chart-gradient-end: #42FF9F;
-                  --chart-line: #42FF9F;
-                }
-                
-                .dark {
-                  --chart-gradient-start: #9b87f5;
-                  --chart-gradient-end: #9b87f5;
-                  --chart-line: #9b87f5;
-                }
-              `}</style>
+              <style>
+                {`
+                  :root {
+                    --chart-gradient-start: #42FF9F;
+                    --chart-gradient-end: #42FF9F;
+                    --chart-line: #42FF9F;
+                  }
+                  
+                  .dark {
+                    --chart-gradient-start: #9b87f5;
+                    --chart-gradient-end: #9b87f5;
+                    --chart-line: #9b87f5;
+                  }
+                `}
+              </style>
               
               <NetWorthChart data={netWorthData} forecast={forecastMode} />
             </div>
