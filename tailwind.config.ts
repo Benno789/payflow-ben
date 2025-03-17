@@ -71,6 +71,9 @@ export default {
 					gray: '#8E9196',
 					'gray-light': '#F1F0FB',
 					'gray-dark': '#1A1F2C',
+					purple: '#9b87f5',        // Lila (für Dark Mode)
+					'purple-dark': '#7E69AB', // Dunkleres Lila
+					'purple-light': '#C4B8F7' // Helleres Lila
 				}
 			},
 			borderRadius: {

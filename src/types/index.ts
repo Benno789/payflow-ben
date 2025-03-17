@@ -10,6 +10,7 @@ export interface Transaction {
   description?: string;
   category?: string;
   status?: 'completed' | 'pending' | 'failed';
+  suspicious?: boolean;
 }
 
 export interface Account {
@@ -79,4 +80,11 @@ export interface NetWorthDataPoint {
   month: string;
   value: number;
   percentChange: number;
+}
+
+export interface SuspiciousTransaction {
+  id: string;
+  transactionId: string;
+  reason: string;
+  resolved: boolean;
 }

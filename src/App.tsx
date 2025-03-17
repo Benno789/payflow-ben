@@ -10,12 +10,19 @@ import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import Subscriptions from "./pages/Subscriptions";
 import Analysis from "./pages/Analysis";
+import Assets from "./pages/Assets";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   const isLoggedIn = localStorage.getItem('onboardingCompleted') === 'true';
+  
+  // Check for dark mode preference
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  if (isDarkMode) {
+    document.documentElement.classList.add('dark');
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -30,6 +37,7 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/subscriptions" element={<Subscriptions />} />
             <Route path="/analysis" element={<Analysis />} />
+            <Route path="/assets" element={<Assets />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

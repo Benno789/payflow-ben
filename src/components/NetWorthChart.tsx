@@ -22,7 +22,6 @@ interface NetWorthChartProps {
 }
 
 const NetWorthChart: React.FC<NetWorthChartProps> = ({ data, forecast = false }) => {
-  // Wenn forecast true ist, fügen wir einen prognostizierten Wert hinzu
   const chartData = forecast 
     ? [...data, { month: 'Sep', value: 22800, percentChange: 6.0 }] 
     : data;
@@ -33,8 +32,8 @@ const NetWorthChart: React.FC<NetWorthChartProps> = ({ data, forecast = false })
         <AreaChart data={chartData}>
           <defs>
             <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#42FF9F" stopOpacity={0.8}/>
-              <stop offset="95%" stopColor="#42FF9F" stopOpacity={0}/>
+              <stop offset="5%" stopColor="var(--chart-gradient-start, #42FF9F)" stopOpacity={0.8}/>
+              <stop offset="95%" stopColor="var(--chart-gradient-end, #42FF9F)" stopOpacity={0}/>
             </linearGradient>
           </defs>
           <XAxis dataKey="month" />
@@ -52,7 +51,7 @@ const NetWorthChart: React.FC<NetWorthChartProps> = ({ data, forecast = false })
           <Area 
             type="monotone" 
             dataKey="value" 
-            stroke="#42FF9F" 
+            stroke="var(--chart-line, #42FF9F)" 
             fillOpacity={1} 
             fill="url(#colorValue)" 
           />
