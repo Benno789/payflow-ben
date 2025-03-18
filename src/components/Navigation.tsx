@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home, FileText, User, PieChart } from 'lucide-react';
+import { Home, FileText, User } from 'lucide-react';
 
 interface NavigationProps {
   active: 'home' | 'documents' | 'profile' | 'assets';
@@ -31,13 +32,6 @@ const Navigation: React.FC<NavigationProps> = ({ active }) => {
           onClick={() => navigate('/analysis')}
         >
           <User className="h-6 w-6" />
-        </button>
-        
-        <button 
-          className={`flex flex-col items-center justify-center py-2 px-4 ${active === 'assets' ? 'text-black dark:text-white' : 'text-gray-500 dark:text-gray-400'}`}
-          onClick={() => navigate('/assets')}
-        >
-          <PieChart className="h-6 w-6" />
         </button>
       </div>
     </nav>

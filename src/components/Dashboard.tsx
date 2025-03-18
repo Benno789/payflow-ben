@@ -36,13 +36,13 @@ const Dashboard: React.FC<DashboardProps> = ({
         
         <div className="space-y-6">
           <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold mb-4">Deine Karte</h3>
+            <h3 className="text-lg font-semibold mb-4">Your Card</h3>
             <Card card={card} />
           </div>
           
           <div className="bg-gradient-to-r from-payflow-purple to-payflow-purple-dark text-white rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold mb-4">Premium Upgrade</h3>
-            <p className="text-sm mb-4">Genieße erweiterte Funktionen mit unserem Premium-Plan</p>
+            <p className="text-sm mb-4">Enjoy advanced features with our Premium plan</p>
             <div className="flex gap-2">
               <button className="bg-white text-payflow-purple-dark px-4 py-2 rounded-lg text-sm font-medium hover:bg-opacity-90 transition-colors">
                 Upgrade

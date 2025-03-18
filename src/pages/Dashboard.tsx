@@ -19,7 +19,22 @@ import {
 } from 'recharts';
 import { Category, Subscription, Transaction, UserProfile } from '@/types';
 import Navigation from '@/components/Navigation';
-import { ChevronRight, ChevronDown, TrendingUp, TrendingDown, PieChart as PieChartIcon, BarChart as BarChartIcon, ArrowRight, Menu, User } from 'lucide-react';
+import { 
+  ChevronRight, 
+  ChevronDown, 
+  TrendingUp, 
+  TrendingDown, 
+  PieChart as PieChartIcon, 
+  BarChart as BarChartIcon, 
+  ArrowRight, 
+  Menu, 
+  User,
+  Home,
+  ShoppingCart,
+  Car,
+  Gamepad,
+  Coffee
+} from 'lucide-react';
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TransactionList from '@/components/TransactionList';
@@ -27,12 +42,13 @@ import StockPortfolio from '@/components/StockPortfolio';
 import NetWorthChart from '@/components/NetWorthChart';
 import ProfileSettings from '@/components/ProfileSettings';
 
+// Updated colors for pie chart
 const categories: Category[] = [
   { id: '1', name: 'Housing', percentage: 30, color: '#ccff75' },
   { id: '2', name: 'Transport', percentage: 15, color: '#bef566' },
-  { id: '3', name: 'Groceries', percentage: 20, color: '#b1eb57' },
-  { id: '4', name: 'Entertainment', percentage: 25, color: '#a4e148' },
-  { id: '5', name: 'Others', percentage: 10, color: '#97d739' }
+  { id: '3', name: 'Groceries', percentage: 20, color: '#a4e148' },
+  { id: '4', name: 'Entertainment', percentage: 25, color: '#97d739' },
+  { id: '5', name: 'Others', percentage: 10, color: '#8accff' }
 ];
 
 const subscriptions: Subscription[] = [
@@ -259,15 +275,18 @@ const Dashboard: React.FC = () => {
   
   const totalSubscriptions = subscriptions.reduce((sum, sub) => sum + sub.amount, 0);
 
+  // Enhanced pie data with icons
+  const enhancedPieData = [
+    { name: 'Housing', value: (totalExpenses * 30) / 100, color: '#ccff75', icon: Home },
+    { name: 'Transport', value: (totalExpenses * 15) / 100, color: '#bef566', icon: Car },
+    { name: 'Groceries', value: (totalExpenses * 20) / 100, color: '#a4e148', icon: ShoppingCart },
+    { name: 'Entertainment', value: (totalExpenses * 25) / 100, color: '#97d739', icon: Gamepad },
+    { name: 'Others', value: (totalExpenses * 10) / 100, color: '#8accff', icon: Coffee }
+  ];
+
   const expensesByCategory = categories.map(cat => ({
     name: cat.name,
     value: (totalExpenses * cat.percentage) / 100,
-    color: cat.color
-  }));
-
-  const pieData = expensesByCategory.map(cat => ({
-    name: cat.name,
-    value: cat.value,
     color: cat.color
   }));
 
@@ -282,6 +301,32 @@ const Dashboard: React.FC = () => {
 
   const handleViewTransactions = () => {
     navigate('/transactions');
+  };
+
+  // Custom Pie Chart Label Component
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index, name, value }) => {
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.75;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    
+    const IconComponent = enhancedPieData[index].icon;
+    
+    return (
+      <g>
+        <foreignObject 
+          x={x - 12} 
+          y={y - 12} 
+          width={24} 
+          height={24}
+          style={{ overflow: 'visible' }}
+        >
+          <div className="flex items-center justify-center w-full h-full">
+            <IconComponent size={20} color={enhancedPieData[index].color} />
+          </div>
+        </foreignObject>
+      </g>
+    );
   };
 
   const CategoriesContent = () => (
@@ -336,7 +381,7 @@ const Dashboard: React.FC = () => {
                   "Expenses"
                 ]}
               />
-              <Bar dataKey="amount" fill="var(--chart-line, #42FF9F)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="amount" fill="var(--chart-line, #ccff75)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -415,7 +460,7 @@ const Dashboard: React.FC = () => {
                   paddingAngle={5}
                   dataKey="value"
                 >
-                  {pieData.map((entry, index) => (
+                  {expensesByCategory.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
@@ -507,21 +552,23 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
               
-              <div className="h-64 mb-4">
+              <div className="h-80 mb-4">
                 <ResponsiveContainer width="100%" height="100%">
                   {!showExpenseBarChart ? (
                     <PieChart>
                       <Pie
-                        data={expensesByCategory}
+                        data={enhancedPieData}
                         cx="50%"
                         cy="50%"
+                        labelLine={false}
+                        label={renderCustomizedLabel}
                         innerRadius={60}
-                        outerRadius={80}
+                        outerRadius={120}
                         paddingAngle={5}
                         dataKey="value"
                       >
-                        {expensesByCategory.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        {enhancedPieData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} stroke={entry.color} strokeWidth={2} />
                         ))}
                       </Pie>
                       <Tooltip 
@@ -535,7 +582,7 @@ const Dashboard: React.FC = () => {
                       />
                     </PieChart>
                   ) : (
-                    <BarChart data={expensesByCategory} layout="vertical">
+                    <BarChart data={enhancedPieData} layout="vertical">
                       <YAxis type="category" dataKey="name" />
                       <XAxis type="number" />
                       <Tooltip 
@@ -548,7 +595,7 @@ const Dashboard: React.FC = () => {
                         ]}
                       />
                       <Bar dataKey="value" radius={[0, 4, 4, 0]}>
-                        {expensesByCategory.map((entry, index) => (
+                        {enhancedPieData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                       </Bar>
@@ -558,10 +605,14 @@ const Dashboard: React.FC = () => {
               </div>
 
               <div className="chart-legend">
-                {expensesByCategory.map((item, index) => (
-                  <div key={index} className="legend-item mr-4">
+                {enhancedPieData.map((item, index) => (
+                  <div key={index} className="legend-item mr-4 flex items-center">
                     <div className="legend-color" style={{ backgroundColor: item.color }}></div>
-                    <span className="dark:text-white">{item.name}: {item.value.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</span>
+                    <span className="dark:text-white mr-1">{item.name}: </span>
+                    <span className="dark:text-white font-semibold">{item.value.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</span>
+                    <span className="ml-1">
+                      {React.createElement(item.icon, { size: 14, className: "ml-1", style: { color: item.color } })}
+                    </span>
                   </div>
                 ))}
               </div>
