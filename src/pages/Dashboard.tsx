@@ -19,7 +19,7 @@ import {
 } from 'recharts';
 import { Category, Subscription, Transaction, UserProfile } from '@/types';
 import Navigation from '@/components/Navigation';
-import { ChevronRight, ChevronDown, TrendingUp, TrendingDown, PieChart as PieChartIcon, BarChart as BarChartIcon, ArrowRight } from 'lucide-react';
+import { ChevronRight, ChevronDown, TrendingUp, TrendingDown, PieChart as PieChartIcon, BarChart as BarChartIcon, ArrowRight, Menu, User } from 'lucide-react';
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TransactionList from '@/components/TransactionList';
@@ -452,18 +452,14 @@ const Dashboard: React.FC = () => {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pb-16">
       <header className="bg-payflow-green dark:bg-primary p-4 flex items-center justify-between">
         <button className="text-black dark:text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+          <Menu className="h-6 w-6" />
         </button>
         <div className="flex items-center">
-          <h1 className="font-bold text-xl mr-2">payflow</h1>
-          <img src="/lovable-uploads/80f382fd-8b96-4c0e-bb3a-85d2daf023e5.png" alt="PayFlow Logo" className="w-6 h-6" />
+          <h1 className="font-bold text-xl mr-2 dark:text-white">payflow</h1>
+          <img src="/lovable-uploads/5ab181e4-bee0-4a30-84c2-50d15ef08b4b.png" alt="PayFlow Logo" className="w-6 h-6 dark:invert" />
         </div>
         <button className="text-black dark:text-white" onClick={() => setProfileOpen(true)}>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
+          <User className="h-6 w-6" />
         </button>
       </header>
 

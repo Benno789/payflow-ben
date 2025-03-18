@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
@@ -35,17 +34,17 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
       <div className="w-full max-w-md">
         <div className="flex flex-col items-center mb-8">
           <div className="flex items-center mb-2">
-            <h1 className="text-3xl font-bold mr-2">payflow</h1>
-            <img src="/lovable-uploads/80f382fd-8b96-4c0e-bb3a-85d2daf023e5.png" alt="PayFlow Logo" className="w-12 h-12" />
+            <h1 className="text-3xl font-bold mr-2 dark:text-white">payflow</h1>
+            <img src="/lovable-uploads/5ab181e4-bee0-4a30-84c2-50d15ef08b4b.png" alt="PayFlow Logo" className="w-12 h-12 dark:invert" />
           </div>
         </div>
 
-        <h2 className="text-xl font-semibold text-center mb-1">Create an account</h2>
-        <p className="text-center text-gray-600 mb-6">Enter your email to sign up for this app</p>
+        <h2 className="text-xl font-semibold text-center mb-1 dark:text-white">Create an account</h2>
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-6">Enter your email to sign up for this app</p>
 
         <form onSubmit={handleContinue} className="space-y-4">
           <Input
@@ -53,10 +52,10 @@ const SignIn = () => {
             placeholder="email@domain.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full"
+            className="w-full dark:bg-gray-800 dark:text-white"
           />
           
-          <Button type="submit" className="w-full bg-black text-white hover:bg-gray-800">
+          <Button type="submit" className="w-full bg-black text-white hover:bg-gray-800 dark:bg-gray-800 dark:text-white">
             Continue
           </Button>
         </form>
