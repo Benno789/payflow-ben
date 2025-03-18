@@ -45,9 +45,9 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --chart-gradient-start: #42FF9F;
-    --chart-gradient-end: #42FF9F;
-    --chart-line: #42FF9F;
+    --chart-gradient-start: #ccff75;
+    --chart-gradient-end: #ccff75;
+    --chart-line: #ccff75;
   }
 
   .dark {
@@ -92,7 +92,7 @@
 }
 
 .gradient-card {
-  background: linear-gradient(135deg, #42FF9F 0%, #34CC7F 100%);
+  background: linear-gradient(135deg, #ccff75 0%, #a3cc5d 100%);
 }
 
 .dark .gradient-card {
