@@ -28,11 +28,11 @@ import NetWorthChart from '@/components/NetWorthChart';
 import ProfileSettings from '@/components/ProfileSettings';
 
 const categories: Category[] = [
-  { id: '1', name: 'Wohnen', percentage: 30, color: '#42FF9F' },
-  { id: '2', name: 'Transport', percentage: 15, color: '#34CC7F' },
-  { id: '3', name: 'Lebensmittel', percentage: 20, color: '#8CFFCB' },
-  { id: '4', name: 'Unterhaltung', percentage: 25, color: '#E2FFF2' },
-  { id: '5', name: 'Sonstiges', percentage: 10, color: '#1A1F2C' }
+  { id: '1', name: 'Housing', percentage: 30, color: '#ccff75' },
+  { id: '2', name: 'Transport', percentage: 15, color: '#bef566' },
+  { id: '3', name: 'Groceries', percentage: 20, color: '#b1eb57' },
+  { id: '4', name: 'Entertainment', percentage: 25, color: '#a4e148' },
+  { id: '5', name: 'Others', percentage: 10, color: '#97d739' }
 ];
 
 const subscriptions: Subscription[] = [
@@ -42,7 +42,7 @@ const subscriptions: Subscription[] = [
     amount: 12.99,
     currency: 'EUR',
     frequency: 'monthly',
-    category: 'Unterhaltung',
+    category: 'Entertainment',
     nextPaymentDate: new Date('2023-07-15')
   },
   {
@@ -51,7 +51,7 @@ const subscriptions: Subscription[] = [
     amount: 9.99,
     currency: 'EUR',
     frequency: 'monthly',
-    category: 'Unterhaltung',
+    category: 'Entertainment',
     nextPaymentDate: new Date('2023-07-10')
   },
   {
@@ -60,7 +60,7 @@ const subscriptions: Subscription[] = [
     amount: 29.99,
     currency: 'EUR',
     frequency: 'monthly',
-    category: 'Gesundheit',
+    category: 'Health',
     nextPaymentDate: new Date('2023-07-05')
   },
   {
@@ -69,7 +69,7 @@ const subscriptions: Subscription[] = [
     amount: 8.99,
     currency: 'EUR',
     frequency: 'monthly',
-    category: 'Einkaufen',
+    category: 'Shopping',
     nextPaymentDate: new Date('2023-07-20')
   }
 ];
@@ -79,7 +79,7 @@ const monthlyExpenseData = [
   { name: 'Feb', amount: 1480 },
   { name: 'Mar', amount: 1720 },
   { name: 'Apr', amount: 1590 },
-  { name: 'Mai', amount: 1830 },
+  { name: 'May', amount: 1830 },
   { name: 'Jun', amount: 1620 }
 ];
 
@@ -88,7 +88,7 @@ const netWorthData = [
   { month: 'Feb', value: 15750, percentChange: 5 },
   { month: 'Mar', value: 16200, percentChange: 2.8 },
   { month: 'Apr', value: 16500, percentChange: 1.8 },
-  { month: 'Mai', value: 17200, percentChange: 4.2 },
+  { month: 'May', value: 17200, percentChange: 4.2 },
   { month: 'Jun', value: 18500, percentChange: 7.5 },
   { month: 'Jul', value: 20000, percentChange: 8.1 },
   { month: 'Aug', value: 21500, percentChange: 7.5 },
@@ -128,9 +128,9 @@ const Dashboard: React.FC = () => {
         type: 'incoming',
         amount: profile.monthlyIncome,
         currency: 'EUR',
-        sender: 'Arbeitgeber GmbH',
+        sender: 'Employer GmbH',
         date: new Date('2023-06-28'),
-        description: 'Gehalt Juni',
+        description: 'Salary June',
         status: 'completed'
       });
       
@@ -140,10 +140,10 @@ const Dashboard: React.FC = () => {
           type: 'outgoing',
           amount: profile.rentAmount,
           currency: 'EUR',
-          recipient: 'Vermietung GmbH',
+          recipient: 'Rental Company',
           date: new Date('2023-06-01'),
-          description: 'Miete Juni',
-          category: 'Wohnen',
+          description: 'Rent June',
+          category: 'Housing',
           status: 'completed'
         });
       }
@@ -153,9 +153,9 @@ const Dashboard: React.FC = () => {
         type: 'outgoing',
         amount: profile.monthlyIncome * 0.05,
         currency: 'EUR',
-        recipient: 'ÖPNV',
+        recipient: 'Public Transport',
         date: new Date('2023-06-03'),
-        description: 'Monatsticket',
+        description: 'Monthly Ticket',
         category: 'Transport',
         status: 'completed'
       });
@@ -165,10 +165,10 @@ const Dashboard: React.FC = () => {
         type: 'outgoing',
         amount: profile.monthlyIncome * 0.12,
         currency: 'EUR',
-        recipient: 'Supermarkt',
+        recipient: 'Grocery Store',
         date: new Date('2023-06-05'),
-        description: 'Wocheneinkauf',
-        category: 'Lebensmittel',
+        description: 'Weekly Shopping',
+        category: 'Groceries',
         status: 'completed'
       });
       
@@ -177,10 +177,10 @@ const Dashboard: React.FC = () => {
         type: 'outgoing',
         amount: 49.99,
         currency: 'EUR',
-        recipient: 'Streaming-Dienst',
+        recipient: 'Streaming Service',
         date: new Date('2023-06-15'),
-        description: 'Abonnement',
-        category: 'Unterhaltung',
+        description: 'Subscription',
+        category: 'Entertainment',
         status: 'completed',
         suspicious: true
       });
@@ -191,9 +191,9 @@ const Dashboard: React.FC = () => {
           type: 'incoming',
           amount: 2800,
           currency: 'EUR',
-          sender: 'Arbeitgeber GmbH',
+          sender: 'Employer GmbH',
           date: new Date('2023-06-28'),
-          description: 'Gehalt Juni',
+          description: 'Salary June',
           status: 'completed'
         },
         {
@@ -201,10 +201,10 @@ const Dashboard: React.FC = () => {
           type: 'outgoing',
           amount: 1200,
           currency: 'EUR',
-          recipient: 'Vermietung GmbH',
+          recipient: 'Rental Company',
           date: new Date('2023-06-01'),
-          description: 'Miete Juni',
-          category: 'Wohnen',
+          description: 'Rent June',
+          category: 'Housing',
           status: 'completed'
         },
         {
@@ -212,9 +212,9 @@ const Dashboard: React.FC = () => {
           type: 'outgoing',
           amount: 99.99,
           currency: 'EUR',
-          recipient: 'ÖPNV',
+          recipient: 'Public Transport',
           date: new Date('2023-06-03'),
-          description: 'Monatsticket',
+          description: 'Monthly Ticket',
           category: 'Transport',
           status: 'completed',
           suspicious: true
@@ -224,10 +224,10 @@ const Dashboard: React.FC = () => {
           type: 'outgoing',
           amount: 156.87,
           currency: 'EUR',
-          recipient: 'Supermarkt',
+          recipient: 'Grocery Store',
           date: new Date('2023-06-05'),
-          description: 'Wocheneinkauf',
-          category: 'Lebensmittel',
+          description: 'Weekly Shopping',
+          category: 'Groceries',
           status: 'completed'
         },
         {
@@ -235,10 +235,10 @@ const Dashboard: React.FC = () => {
           type: 'outgoing',
           amount: 49.99,
           currency: 'EUR',
-          recipient: 'Streaming-Dienst',
+          recipient: 'Streaming Service',
           date: new Date('2023-06-15'),
-          description: 'Abonnement',
-          category: 'Unterhaltung',
+          description: 'Subscription',
+          category: 'Entertainment',
           status: 'completed'
         }
       ];
@@ -287,7 +287,7 @@ const Dashboard: React.FC = () => {
   const CategoriesContent = () => (
     <div>
       <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-4">
-        <h3 className="text-lg font-semibold mb-3 dark:text-white">Ausgaben nach Kategorie</h3>
+        <h3 className="text-lg font-semibold mb-3 dark:text-white">Expenses by Category</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {categories.map((category) => (
             <div key={category.id} className="category-card bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
@@ -321,7 +321,7 @@ const Dashboard: React.FC = () => {
       </div>
       
       <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-        <h3 className="text-lg font-semibold mb-3 dark:text-white">Monatliche Ausgabenentwicklung</h3>
+        <h3 className="text-lg font-semibold mb-3 dark:text-white">Monthly Expense Development</h3>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={monthlyExpenseData}>
@@ -333,7 +333,7 @@ const Dashboard: React.FC = () => {
                     style: 'currency', 
                     currency: 'EUR' 
                   }), 
-                  "Ausgaben"
+                  "Expenses"
                 ]}
               />
               <Bar dataKey="amount" fill="var(--chart-line, #42FF9F)" radius={[4, 4, 0, 0]} />
@@ -353,15 +353,15 @@ const Dashboard: React.FC = () => {
         <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-4">
           <div className="flex flex-col md:flex-row justify-between mb-4">
             <div>
-              <h3 className="text-lg font-semibold dark:text-white">Deine Abonnements</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Monatliche Gesamtkosten</p>
+              <h3 className="text-lg font-semibold dark:text-white">Your Subscriptions</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Monthly Total</p>
               <p className="text-xl font-bold text-payflow-green-dark dark:text-primary">
                 {totalMonthly.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}
               </p>
             </div>
             <div className="mt-3 md:mt-0">
               <button className="px-4 py-2 bg-payflow-green dark:bg-primary text-black dark:text-white rounded-lg text-sm font-medium hover:bg-payflow-green-dark dark:hover:bg-purple-600 transition-colors">
-                Neues Abo hinzufügen
+                Add New Subscription
               </button>
             </div>
           </div>
@@ -376,7 +376,7 @@ const Dashboard: React.FC = () => {
                   <div>
                     <p className="font-medium dark:text-white">{sub.name}</p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      Nächste Zahlung: {sub.nextPaymentDate.toLocaleDateString('de-DE')}
+                      Next Payment: {sub.nextPaymentDate.toLocaleDateString('de-DE')}
                     </p>
                   </div>
                 </div>
@@ -388,8 +388,8 @@ const Dashboard: React.FC = () => {
                     })}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {sub.frequency === 'monthly' ? 'Monatlich' : 
-                     sub.frequency === 'yearly' ? 'Jährlich' : 'Wöchentlich'}
+                    {sub.frequency === 'monthly' ? 'Monthly' : 
+                     sub.frequency === 'yearly' ? 'Yearly' : 'Weekly'}
                   </p>
                 </div>
               </div>
@@ -398,15 +398,15 @@ const Dashboard: React.FC = () => {
         </div>
         
         <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-          <h3 className="text-lg font-semibold mb-3 dark:text-white">Abonnements nach Kategorie</h3>
+          <h3 className="text-lg font-semibold mb-3 dark:text-white">Subscriptions by Category</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={[
-                    { name: 'Unterhaltung', value: 31.97, color: '#42FF9F' },
-                    { name: 'Gesundheit', value: 29.99, color: '#34CC7F' },
-                    { name: 'Einkaufen', value: 8.99, color: '#8CFFCB' }
+                    { name: 'Entertainment', value: 31.97, color: '#42FF9F' },
+                    { name: 'Health', value: 29.99, color: '#34CC7F' },
+                    { name: 'Shopping', value: 8.99, color: '#8CFFCB' }
                   ]}
                   cx="50%"
                   cy="50%"
@@ -425,7 +425,7 @@ const Dashboard: React.FC = () => {
                       style: 'currency', 
                       currency: 'EUR' 
                     }), 
-                    "Betrag"
+                    "Amount"
                   ]}
                 />
               </PieChart>
@@ -433,9 +433,9 @@ const Dashboard: React.FC = () => {
           </div>
           <div className="chart-legend">
             {[
-              { name: 'Unterhaltung', value: 31.97, color: '#42FF9F' },
-              { name: 'Gesundheit', value: 29.99, color: '#34CC7F' },
-              { name: 'Einkaufen', value: 8.99, color: '#8CFFCB' }
+              { name: 'Entertainment', value: 31.97, color: '#42FF9F' },
+              { name: 'Health', value: 29.99, color: '#34CC7F' },
+              { name: 'Shopping', value: 8.99, color: '#8CFFCB' }
             ].map((item, index) => (
               <div key={index} className="legend-item mr-4">
                 <div className="legend-color" style={{ backgroundColor: item.color }}></div>
@@ -469,19 +469,19 @@ const Dashboard: React.FC = () => {
         <Tabs defaultValue="overall" className="w-full">
           <TabsList className="flex w-full overflow-x-auto mb-4 bg-gray-100 dark:bg-gray-800 rounded-full p-1">
             <TabsTrigger value="overall" className="flex-1 rounded-full data-[state=active]:bg-black data-[state=active]:text-white dark:data-[state=active]:bg-primary">
-              overall
+              Overall
             </TabsTrigger>
             <TabsTrigger value="categories" className="flex-1 rounded-full data-[state=active]:bg-black data-[state=active]:text-white dark:data-[state=active]:bg-primary">
-              categories
+              Categories
             </TabsTrigger>
             <TabsTrigger value="subscriptions" className="flex-1 rounded-full data-[state=active]:bg-black data-[state=active]:text-white dark:data-[state=active]:bg-primary">
-              subscriptions
+              Subscriptions
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overall" className="mt-0">
             <div className="bg-payflow-green dark:bg-primary rounded-lg p-4 mb-6">
-              <p className="text-sm text-gray-700 dark:text-gray-200 mb-1">expenses</p>
+              <p className="text-sm text-gray-700 dark:text-gray-200 mb-1">Expenses</p>
               <h2 className="text-3xl font-bold dark:text-white">{totalExpenses.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</h2>
               <p className={`text-sm ${percentageChange > 0 ? 'text-red-500' : 'text-green-500'}`}>
                 {percentageChange > 0 ? '+' : ''}{percentageChange.toFixed(0)}% over last month
@@ -490,7 +490,7 @@ const Dashboard: React.FC = () => {
             
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-6">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold dark:text-white">Ausgabenverteilung</h3>
+                <h3 className="text-lg font-semibold dark:text-white">Expense Distribution</h3>
                 <div className="flex items-center space-x-2">
                   <button 
                     onClick={() => setShowExpenseBarChart(false)}
@@ -530,7 +530,7 @@ const Dashboard: React.FC = () => {
                             style: 'currency', 
                             currency: 'EUR' 
                           }), 
-                          "Ausgaben"
+                          "Expenses"
                         ]}
                       />
                     </PieChart>
@@ -544,7 +544,7 @@ const Dashboard: React.FC = () => {
                             style: 'currency', 
                             currency: 'EUR' 
                           }), 
-                          "Ausgaben"
+                          "Expenses"
                         ]}
                       />
                       <Bar dataKey="value" radius={[0, 4, 4, 0]}>
@@ -570,7 +570,7 @@ const Dashboard: React.FC = () => {
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm mb-6">
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">to save</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">To save</p>
                   <h2 className="text-3xl font-bold dark:text-white">{toSave.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</h2>
                 </div>
                 <button 
@@ -589,8 +589,8 @@ const Dashboard: React.FC = () => {
               </div>
               <div>
                 <div className="bg-white dark:bg-gray-800 rounded-lg p-4 h-full">
-                  <h3 className="text-lg font-semibold mb-2 dark:text-white">Abonnements</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Monatliche Ausgaben</p>
+                  <h3 className="text-lg font-semibold mb-2 dark:text-white">Subscriptions</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Monthly Expenses</p>
                   <p className="text-2xl font-bold text-payflow-green-dark dark:text-primary mb-4">
                     {totalSubscriptions.toLocaleString('de-DE', { 
                       style: 'currency', 
@@ -598,7 +598,7 @@ const Dashboard: React.FC = () => {
                     })}
                   </p>
                   <button className="text-sm text-payflow-green dark:text-primary hover:underline flex items-center">
-                    <span>Alle anzeigen</span>
+                    <span>View All</span>
                     <ChevronRight className="h-4 w-4" />
                   </button>
                 </div>
@@ -607,13 +607,13 @@ const Dashboard: React.FC = () => {
 
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-6">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold dark:text-white">Nettovermögen</h3>
+                <h3 className="text-lg font-semibold dark:text-white">Net Worth</h3>
                 <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
                   <button 
                     onClick={() => setForecastMode(false)} 
                     className={`px-3 py-1.5 text-xs ${!forecastMode ? 'bg-black text-white dark:bg-primary' : 'dark:text-white'}`}
                   >
-                    Aktuell
+                    Current
                   </button>
                   <button 
                     onClick={() => setForecastMode(true)} 
@@ -648,7 +648,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {forecastMode ? 'Prognose für nächsten Monat' : 'Aktuelle Entwicklung'}
+                  {forecastMode ? 'Next Month Prognosis' : 'Current Development'}
                 </p>
               </div>
 
